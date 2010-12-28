@@ -1,0 +1,13 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @group.name %>
+</p>
+
+<% content_for :sidebar do %>
+<ul>
+  <li> <%= link_to 'Edit', edit_group_path(@group) %> </li>
+  <li> <%= link_to 'Back', groups_path %></li>  
+</ul>
+<%end%>

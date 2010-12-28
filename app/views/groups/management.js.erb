@@ -1,0 +1,29 @@
+ <% @group = Group.find(@group.id) %>
+<% if @group.websites.count >= @group.users.count  %>
+
+  <% for index in 0...@group.websites.count  %>
+   <tr>
+  
+    <td colspan="3"><%= @group.websites[index].name %> <%= link_to image_tag("delete_10.png"), "" %></td>
+        
+    <% if @group.users[index].nil? %>
+      <td colspan="3">&nbsp;</td>
+    <%else%>  
+        <td colspan ="3"><%= @group.users[index].name %> <%= link_to image_tag("delete_10.png"), "" %></td> 
+    <%end%>  
+  </tr>
+  <%end%>
+<%else%>
+   <% @group.users.each_with_index do |user,index| %>
+   
+   <tr>
+    <% if @group.website[index] %>
+      <td colspan="3"><%=  @group.website[index].name %> <%= link_to image_tag("delete_10.png"), "" %></td>
+    <%else%>  
+      <td colspan="3">&nbsp;</td>
+    <%end%>
+    <td colspan ="3"><%= user.name %> <%= link_to image_tag("delete_10.png"), "" %></td> 
+  </tr>
+  <%end%>
+<%end%>
+

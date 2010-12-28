@@ -1,0 +1,137 @@
+<% content_for :head do %>
+ <style type="text/css" media="screen">
+   	  span {
+          width: 200px;
+          height : 250px;
+          border : 5px solid #111;  
+          color : #323;
+          text-align :center;
+         }
+         table {
+           width : 180px;
+           margin-left: 10px;
+           border-collapse: collapse;
+           border : 1px solid black; 
+         }
+         table tr th {
+          align  :  center;
+          width  :  90px;
+          valign : top;
+          border : 2px solid black;
+        }
+        table tr  td {
+          width  :  90px;
+          align  :  center;
+          valign :  top;
+          border-right :  2px solid black;
+          border-left : 2px solid black;
+        }
+        
+        ul {
+      
+         margin-left : 1px;
+        
+        }
+        ul li {
+         text-align : left;
+         margin-bottom: 5px;
+         padding : 1px;
+       
+        }
+ </style>
+ 
+  <script type="text/javascript">
+    function make_ajax_call(draggable_element_id,group_id) {
+      var id = parseInt(group_id.split("_")[1]);
+      var path = "/groups/"+id+"/management?"
+      if (draggable_element_id.split("_")[0] == "user") {
+        // /groups/1/management?user_id=1
+        var user_id = parseInt(draggable_element_id.split("_")[1]);
+        path=path+"user_id="+user_id; 
+        ajax_call(path,id);   
+     }
+     else {     
+        var website_id = parseInt(draggable_element_id.split("_")[1]);
+        path=path+"website_id="+website_id; 
+        ajax_call(path,id);
+      }  
+   }
+    
+    function ajax_call(url,id) {
+     
+       content = new Ajax.Request(url,{
+           method: 'get',
+           onSuccess: function(content) {
+           var response = content.responseText
+            
+              document.getElementById('management_'+id).innerHTML = response 
+            }
+        });  
+     
+    }
+    
+  </script>
+<%end%>
+
+
+<% @groups.each_with_index do |group,index| %> 
+  <% shift = 250*index.to_i + 5 %> 
+  <span id="<%= dom_id(group) %>" style="position: absolute; left:<%= shift %>px;  top:70px;">
+    <%= group.name %> <hr/>
+    <table>
+    <thead>
+     <tr>
+       <th colspan="3" > Website </th>
+       <th colspan="3"> User </th>
+      </tr>
+     </thead>
+     <tbody id="management_<%= group.id %>"> 
+      <% group.websites.each_with_index do |website,index| %>
+      <tr>
+        <td colspan="3"><%= website.name %> <%= link_to image_tag("delete_10.png"), "" %></td>
+        <% unless group.users[index] %>
+        <td colspan = "3"> &nbsp; </td>
+        <%else%>
+        <td colspan ="3"><%= group.users[index].name %> <%= link_to image_tag("delete_10.png"), "" %></td></td> 
+       <%end%> 
+        
+      </tr>
+     <%end%>
+    </tbody>  
+    </table>  
+    <%= drop_receiving_element(dom_id(group),:onDrop => "function(draggable_element, droppable_element, event) { make_ajax_call(draggable_element.id,droppable_element.id)}")%>
+  </span>
+
+    
+  <!-- <#%#= content_tag(:span,group.name,:style => "position: absolute; left:#{shift}px;  top:70px;" ) %> -->
+<%end%>
+
+
+
+<span style="position: fixed; left: 100px; bottom: 40px">
+   WEBSITE <hr/>
+   <ul style="list-style-image: url(<%= image_path('add_link_10.png') %>)">
+   <% @websites.each do |website| %>
+      <li id="<%=dom_id(website) %>"> <%= website.name %> </li>
+      <%= draggable_element(dom_id(website), :revert => true) %>
+   <%end%>
+   </ul>
+</span>
+     
+ <span style="position: fixed; right: 450px; bottom: 40px">
+     USER <hr/>
+   <ul style="list-style-image: url(<%= image_path('add_link_10.png') %>)">
+   <% @users.each do |user| %>
+     <li id="<%=dom_id(user) %>"> <%= user.name %> </li>
+       <%= draggable_element(dom_id(user), :revert => true) %>
+   <%end%>
+   </ul>
+</span>
+
+<%content_for :sidebar do %>
+ <ul>
+   <li>
+    <%=link_to 'New Group', new_group_path %>
+   </li>
+ </ul>
+<%end%>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Managment</title>
+  <%= stylesheet_link_tag :all %>
+  <%= javascript_include_tag :defaults %>
+  <%= csrf_meta_tag %>
+  <%= yield :head %>
+</head>
+<body>
+  <div id="container_16">
+    <div id="header">
+      <h1><%= controller.controller_name.upcase %> <%= controller.action_name.capitalize %> Page </h1>
+    </div>
+    <div id="body">
+      <div id="main-content"> 
+         <%= yield %>
+      </div>
+      <div id="sidebar">
+         <%= yield :sidebar %>  
+       </div>  
+    </div>   
+  </div>
+  <div id ="footer">
+    Drag & Drop Example
+  </div>
+</body>
+</html>
