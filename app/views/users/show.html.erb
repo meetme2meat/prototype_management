@@ -5,6 +5,9 @@
   <%= @user.name %>
 </p>
 
-
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+<% content_for :sidebar do %>
+<ul>
+<li> <%= link_to 'Edit', edit_user_path(@user) %> </li>
+<li> <%= link_to 'Back', users_path %> </li>
+</ul>
+<%end%>

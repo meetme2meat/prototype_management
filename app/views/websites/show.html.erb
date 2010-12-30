@@ -5,6 +5,9 @@
   <%= @website.name %>
 </p>
 
-
-<%= link_to 'Edit', edit_website_path(@website) %> |
-<%= link_to 'Back', websites_path %>
+<% content_for :sidebar do %>
+<ul>
+ <li> <%= link_to 'Edit', edit_website_path(@website) %> </li>
+ <li> <%= link_to 'Back', websites_path %> </li>
+</ul>
+<%end%> 

@@ -31,7 +31,6 @@ div#header h1 {
 
 
 div#body {
-
  padding: 0;
  margin : 0;
  height : 600px;
@@ -87,10 +86,83 @@ div#sidebar ul:hover {
   z-index: 1px;
 }
 
+
+
 table.listing {
- width : 500px;
- margin: 50px 0 0 50px;
- border : 2px solid;
+ font-family: Arial, "MS Trebuchet", sans-serif;  
+ position: absolute;
+ left: 200px;
+ top:  150px;
+ width : 400px;
+ height: 150px;
+ border-collapse: collapse;
+ text-align: center;
+ border : 5px solid;
+ 
+}
+
+table.listing tr {
+ border-bottom : 1px solid #CCC;
+}
+
+table.listing tr td {
+  height:  45px;
+  padding: 10px;
+  width:   30px; 
+}
+
+table.listing thead tr td {
+ height: 35px;
+ background-color: #F3DA2F;
+ border-bottom: 3px solid black;
+ padding: 0px;
+}
+
+table.listing input#group_submit {
+ width: 120px;
+ height: 40px;
+}
+
+table.listing input#website_submit {
+ width: 120px;
+ height: 40px;
+}
+
+table.listing input#user_submit {
+ width: 120px;
+ height: 40px;
+}
+
+div#heading {
+  position: absolute;
+  left: 350px;
+  
+}
+
+table.gradient {
+ position: absolute;
+ left: 350px;
+ top: 150px;
+ width: 200px;
+ height: 200px;
+ border: 2px solid black;
+ border-collapse: collapse;
+}
+
+/*table.gradient tr th {
+ border: 2px solid;
+} */
+table.gradient thead tr th {
+ padding: 0px;
+ background-color: #F3DA2F;
+ border-bottom: 5px solid black;
+ height: 20px; 
+}
+
+table.gradient tbody tr td {
+ text-align: center;
+ border: 2px solid black;
+ padding: 0px;
 }
 
 /*table.listing tr td {

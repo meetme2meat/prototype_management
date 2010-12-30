@@ -1,23 +1,32 @@
-<h1>Listing websites</h1>
+<div id="heading"> 
+  <h1>Listing Websites</h1>
+</div>
 
-<table>
+<table class="gradient">
+ <thead>
   <tr>
-    <th>Name</th>
-    <th></th>
-    <th></th>
-    <th></th>
+    <th colspan="2">Name</th>
   </tr>
+</thead>
 
+<tbody>
 <% @websites.each do |website| %>
   <tr>
-    <td><%= website.name %></td>
-    <td><%= link_to 'Show', website %></td>
-    <td><%= link_to 'Edit', edit_website_path(website) %></td>
-    <td><%= link_to 'Destroy', website, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to (website.name), website %></td>
+    <td>
+      <%= link_to image_tag("edit_16.png"),edit_website_path(website) %>
+      <%= link_to image_tag("cancel_16.png"),website, :confirm => 'Are you sure?', :method => :delete %>
+    </td>
   </tr>
 <% end %>
+</tbody>
 </table>
 
-<br />
 
-<%= link_to 'New Website', new_website_path %>
+<% content_for :sidebar do %>
+  <ul> 
+   <li> <%= link_to 'New Website', new_website_path %> </li>
+  </ul> 
+<%end%>
+
+

@@ -1,23 +1,29 @@
-<h1>Listing users</h1>
+<div id="heading"> 
+  <h1>Listing users</h1>
+</div>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @users.each do |user| %>
-  <tr>
-    <td><%= user.name %></td>
-    <td><%= link_to 'Show', user %></td>
-    <td><%= link_to 'Edit', edit_user_path(user) %></td>
-    <td><%= link_to 'Destroy', user, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
+<table class="gradient">
+  <thead>
+    <tr>
+      <th colspan="2">Name</th>
+    </tr>
+  </thead>
+  <tbody> 
+  <% @users.each do |user| %>
+    <tr>
+      <td><%= link_to (user.name),user %></td>
+      <td>
+        <%= link_to image_tag("edit_16.png"), edit_user_path(user) %>
+        <%= link_to image_tag("cancel_16.png"), user, :confirm => 'Are you sure?', :method => :delete %>
+      </td>
+    </tr> 
+  <% end %>
+  </tbody>
 </table>
 
-<br />
 
-<%= link_to 'New User', new_user_path %>
+<% content_for :sidebar do%>
+<ul>
+ <li><%= link_to 'New User', new_user_path %> </li>
+</ul>
+<%end%> 
