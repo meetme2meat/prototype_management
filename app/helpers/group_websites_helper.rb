@@ -1,2 +1,0 @@
-module GroupWebsitesHelper
-end
