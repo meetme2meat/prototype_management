@@ -1,0 +1,13 @@
+%p#notice == #{notice}
+
+%p
+  %b Name:
+  = @website.name 
+
+- content_for :sidebar do 
+  %ul
+    %li 
+      = link_to 'Edit', edit_website_path(@website)
+    %li  
+      = link_to 'Back', websites_path
+ 

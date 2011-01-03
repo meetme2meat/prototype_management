@@ -1,0 +1,14 @@
+%p#notice
+  = notice
+
+%p
+  %b Name:
+  = @user.name 
+
+
+- content_for :sidebar do 
+  %ul
+    %li 
+      = link_to 'Edit', edit_user_path(@user) 
+    %li 
+      = link_to 'Back', users_path 

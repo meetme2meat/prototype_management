@@ -1,0 +1,24 @@
+%div#heading
+  %h1 Listing Websites
+
+%table.gradient
+  %thead
+    %tr
+      %th{:colspan => "2"} Name
+      
+  %tbody
+    - @websites.each do |website|
+      %tr
+        %td 
+          = link_to (website.name),website
+        %td
+          = link_to image_tag("edit_16.png"),edit_website_path(website)
+          = link_to image_tag("cancel_16.png"),website, :confirm => 'Are you sure?', :method => :delete
+        
+- content_for :sidebar do
+  %ul
+    %li
+      = link_to 'New Website', new_website_path                    
+
+
+

@@ -1,0 +1,28 @@
+= form_for(@website) do |f|
+  - if @website.errors.any? 
+    %div#error_explanation
+      %h2== #{pluralize(@website.errors.count, "error")} prohibited this website from being saved:
+   
+      %ul
+        - @website.errors.full_messages.each do |msg|
+          %li== #{msg}
+  %table{:class => "listing",:border => "0",:cellpadding => "0",:cellspacing => "0" }
+    %thead
+      %tr
+        %td{:colspan => "2"} Website Form
+    
+    %tbody
+      %tr
+        %td 
+          = f.label :name ,:class => "label"
+          = f.text_field :name ,:class => "text-field",:size => 30 
+      %tr
+        %td{:colspan => "2"}
+          = f.submit  
+     
+      
+- content_for :sidebar do
+  %ul 
+    %li 
+      = link_to 'Back', websites_path 
+
